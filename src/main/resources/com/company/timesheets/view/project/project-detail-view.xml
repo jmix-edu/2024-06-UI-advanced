@@ -3,6 +3,14 @@
       title="msg://projectDetailView.title"
       focusComponent="form">
     <data>
+        <collection id="clientsDc" class="com.company.timesheets.entity.Client">
+            <loader id="clientsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ts_Client e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
         <instance id="projectDc"
                   class="com.company.timesheets.entity.Project">
             <fetchPlan extends="_base">

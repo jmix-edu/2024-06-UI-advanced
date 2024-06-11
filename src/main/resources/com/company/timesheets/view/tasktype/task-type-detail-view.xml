@@ -17,12 +17,15 @@
         <action id="closeAction" type="detail_close"/>
     </actions>
     <layout>
-        <formLayout id="form" dataContainer="taskTypeDc">
+        <formLayout id="form" dataContainer="taskTypeDc" maxWidth="40em" alignSelf="CENTER">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+            </responsiveSteps>
             <textField id="nameField" property="name"/>
             <textArea id="descriptionField" property="description"
                       height="9.5em"/>
         </formLayout>
-        <hbox id="detailActions">
+        <hbox id="detailActions" alignSelf="CENTER">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>

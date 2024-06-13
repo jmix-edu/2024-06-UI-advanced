@@ -19,6 +19,7 @@ repositories {
     maven {
         url 'https://nexus.jmix.io/repository/public'
     }
+    mavenLocal()
 }
 
 dependencies {
@@ -35,6 +36,8 @@ dependencies {
     implementation 'io.jmix.datatools:jmix-datatools-flowui-starter'
     implementation 'io.jmix.pessimisticlock:jmix-pessimisticlock-flowui-starter'
     implementation 'io.jmix.pessimisticlock:jmix-pessimisticlock-starter'
+
+    implementation 'com.company:my-awesome-theme:1.0-SNAPSHOT'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 

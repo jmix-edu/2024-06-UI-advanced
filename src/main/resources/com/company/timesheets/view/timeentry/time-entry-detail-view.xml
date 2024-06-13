@@ -40,7 +40,7 @@
                     <icon icon="CALENDAR"/>
                 </prefix>
             </datePicker>
-            <entityPicker id="userField" property="user" readOnly="true">
+            <entityComboBox id="userField" property="user" readOnly="true">
                 <prefix>
                     <icon icon="USER"/>
                 </prefix>
@@ -49,8 +49,20 @@
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
-            </entityPicker>
-            <entityComboBox id="taskField" property="task" itemsContainer="tasksDc">
+                <itemsQuery class="com.company.timesheets.entity.User"
+                            searchStringFormat="(?i)%${inputString}%"
+                            escapeValueForLike="true">
+                    <fetchPlan extends="_instance_name"/>
+                    <query>
+                        <![CDATA[select e from ts_User e
+                        where e.username like :searchString
+                            or e.firstName like :searchString
+                            or e.lastName like :searchString
+                            escape '\' order by e.username asc]]>
+                    </query>
+                </itemsQuery>
+            </entityComboBox>
+            <entityComboBox id="taskField" property="task">
                 <prefix>
                     <icon icon="FILE_TEXT_O"/>
                 </prefix>

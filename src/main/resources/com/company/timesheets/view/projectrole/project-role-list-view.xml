@@ -17,7 +17,8 @@
         <dataLoadCoordinator auto="true"/>
         <urlQueryParameters>
             <pagination component="pagination"/>
-            <genericFilter component="genericFilter"/>
+            <propertyFilter component="nameFilter"/>
+            <propertyFilter component="typeFilter"/>
         </urlQueryParameters>
     </facets>
     <actions>
@@ -25,10 +26,38 @@
         <action id="discardAction" type="lookup_discard"/>
     </actions>
     <layout>
-        <genericFilter id="genericFilter"
-                       dataLoader="projectRolesDl">
-            <properties include=".*"/>
-        </genericFilter>
+        <details summaryText="msg://filters.text" width="100%">
+            <formLayout>
+                <propertyFilter id="nameFilter"
+                                    property="name"
+                                    operation="CONTAINS"
+                                    dataLoader="projectRolesDl"
+                                    labelVisible="false">
+                    <textField id="nameFilterField"
+                               placeholder="msg://nameFilter.placeholder"
+                               clearButtonVisible="true">
+                        <prefix>
+                            <icon icon="SEARCH"/>
+                        </prefix>
+                    </textField>
+                </propertyFilter>
+                <propertyFilter id="typeFilter"
+                                    property="type"
+                                    operation="EQUAL"
+                                    dataLoader="projectRolesDl"
+                                    labelVisible="false">
+                    <select id="typeFilterField"
+                            itemsEnum="com.company.timesheets.entity.ProjectRoleType"
+                            emptySelectionAllowed="true"
+                            emptySelectionCaption="msg://typeFilter.placeholder">
+                        <prefix>
+                            <icon icon="SEARCH"/>
+                        </prefix>
+                    </select>
+
+                </propertyFilter>
+            </formLayout>
+        </details>
 
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="projectRolesDataGrid.create"/>
@@ -47,8 +76,8 @@
             </actions>
             <columns resizable="true">
                 <column property="name"/>
-                <column property="type"/>
-                <column property="description"/>
+                <column property="type" autoWidth="true" flexGrow="0"/>
+                <column property="description" flexGrow="2"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

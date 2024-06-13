@@ -14,6 +14,14 @@
                 </query>
             </loader>
         </collection>
+        <collection id="clientsDc" class="com.company.timesheets.entity.Client">
+            <loader id="clientsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ts_Client e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -31,6 +39,23 @@
                        dataLoader="projectsDl">
             <properties include=".*"/>
         </genericFilter>
+        <propertyFilter id="clientFilter"
+                        dataLoader="projectsDl" property="client"
+                        operation="EQUAL"
+                        labelVisible="false"
+                        width="100%" maxWidth="30em">
+            <entityComboBox id="nameFilterField"
+                            placeholder="Find by a client..."
+                            itemsContainer="clientsDc"
+                            metaClass="ts_Client">
+                <prefix>
+                    <icon icon="SEARCH"/>
+                </prefix>
+            </entityComboBox>
+        </propertyFilter>
+        <details>
+
+        </details>
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="projectsDataGrid.create"/>
             <button id="editBtn" action="projectsDataGrid.edit"/>
@@ -49,8 +74,8 @@
             <columns resizable="true">
                 <column property="name"/>
                 <column property="client"/>
-                <column property="status"/>
-                <column property="description"/>
+                <column property="status" autoWidth="true" flexGrow="0"/>
+                <column property="description" flexGrow="2"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

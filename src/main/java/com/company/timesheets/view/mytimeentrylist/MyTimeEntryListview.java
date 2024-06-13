@@ -5,8 +5,11 @@ import com.company.timesheets.app.TimeEntrySupport;
 import com.company.timesheets.entity.TimeEntry;
 import com.company.timesheets.entity.User;
 import com.company.timesheets.view.main.MainView;
+import com.company.timesheets.view.timeentry.TimeEntryDetailView;
+import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.usersubstitution.CurrentUserSubstitution;
+import io.jmix.flowui.DialogWindows;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.model.CollectionLoader;
@@ -26,6 +29,8 @@ public class MyTimeEntryListview extends StandardView {
     private CurrentUserSubstitution currentUserSubstitution;
     @ViewComponent
     private CollectionLoader<TimeEntry> timeEntriesDl;
+    @Autowired
+    private DialogWindows dialogWindows;
 
     @Subscribe("timeEntriesDataGrid.copy")
     public void onTimeEntriesDataGridCopy(final ActionPerformedEvent event) {
@@ -35,15 +40,25 @@ public class MyTimeEntryListview extends StandardView {
         }
 
         TimeEntry copiedEntity = timeEntrySupport.copy(selectedItem);
+
+        DialogWindow<TimeEntryDetailView> window = dialogWindows.detail(timeEntriesDataGrid)
+                .withViewClass(TimeEntryDetailView.class)
+                .newEntity(copiedEntity)
+                .build();
+
+        window.getView().setOwnTimeEntry(true);
+        window.open();
     }
 
-    @Subscribe
-    public void onInitEntity(final StandardDetailView.InitEntityEvent<TimeEntry> event) {
-        User user = (User) currentUserSubstitution.getEffectiveUser();
-
-        timeEntriesDl.setParameter("username_obtain_in_controller", user.getUsername());
-
-        timeEntriesDl.load();
+    @Install(to = "timeEntriesDataGrid.create", subject = "queryParametersProvider")
+    private QueryParameters timeEntriesDataGridCreateQueryParametersProvider() {
+        return QueryParameters.of(TimeEntryDetailView.PARAMETER_OWN_TIME_ENTRY, "");
     }
+
+    @Install(to = "timeEntriesDataGrid.edit", subject = "queryParametersProvider")
+    private QueryParameters timeEntriesDataGridEditQueryParametersProvider() {
+        return QueryParameters.of(TimeEntryDetailView.PARAMETER_OWN_TIME_ENTRY, "");
+    }
+
 
 }

@@ -5,7 +5,7 @@
         <collection id="timeEntriesDc" class="com.company.timesheets.entity.TimeEntry">
             <loader id="timeEntriesDl" readOnly="true">
                 <query>
-                    <![CDATA[select e from ts_TimeEntry e where e.user.username = :username_obtain_in_controller]]>
+                    <![CDATA[select e from ts_TimeEntry e where e.user.username = :current_user_username]]>
                 </query>
             </loader>
             <fetchPlan extends="_base"/>

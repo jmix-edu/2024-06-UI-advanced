@@ -1,5 +1,6 @@
 package com.company.timesheets.view.client;
 
+import com.company.timesheets.component.contactInformation.ContactInformationFragment;
 import com.company.timesheets.entity.Client;
 import com.company.timesheets.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
@@ -23,6 +24,10 @@ public class ClientDetailView extends StandardDetailView<Client> {
     private FileUploadField imageUpload;
     @ViewComponent
     private JmixImage<byte[]> image;
+    @ViewComponent
+    private ContactInformationFragment containerInformation;
+
+
 
     @Subscribe
     public void onReady(final ReadyEvent event) {

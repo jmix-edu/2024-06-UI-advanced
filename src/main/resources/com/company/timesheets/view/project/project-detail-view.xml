@@ -42,7 +42,10 @@
         <action id="closeAction" type="detail_close"/>
         <action id="saveCloseAction" type="detail_saveClose"/>
     </actions>
-    <layout expand="contentBox" padding="false" spacing="false">
+    <layout alignItems="STRETCH"
+            expand="contentBox"
+            padding="false"
+            spacing="false">
         <vbox id="contentBox" expand="tabSheet" css="overflow: auto">
             <formLayout id="form" dataContainer="projectDc">
                 <textField id="nameField" property="name" colspan="2">
@@ -127,7 +130,8 @@
                 </tab>
             </tabSheet>
         </vbox>
-        <hbox id="detailActions">
+        <hbox id="detailActions"
+        classNames="px-m py-s bg-contrast-5">
             <button id="saveAndCloseBtn" action="saveCloseAction"/>
             <button id="closeBtn" action="closeAction"/>
             <button id="saveBtn" action="saveAction"/>

@@ -32,65 +32,68 @@
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
-    <layout>
-        <formLayout id="form"
-                    dataContainer="timeEntryDc">
-            <datePicker id="dateField" property="date">
-                <prefix>
-                    <icon icon="CALENDAR"/>
-                </prefix>
-            </datePicker>
-            <entityComboBox id="userField" property="user" readOnly="true">
-                <prefix>
-                    <icon icon="USER"/>
-                </prefix>
-                <actions>
-                    <action id="assignSelf" icon="USER_CHECK" text="msg://actions.assignSelf.description"/>
-                    <action id="entityLookup" type="entity_lookup"/>
-                    <action id="entityClear" type="entity_clear"/>
-                </actions>
-                <itemsQuery class="com.company.timesheets.entity.User"
-                            searchStringFormat="(?i)%${inputString}%"
-                            escapeValueForLike="true">
-                    <fetchPlan extends="_instance_name"/>
-                    <query>
-                        <![CDATA[select e from ts_User e
-                        where e.username like :searchString
-                            or e.firstName like :searchString
-                            or e.lastName like :searchString
-                            escape '\' order by e.username asc]]>
-                    </query>
-                </itemsQuery>
-            </entityComboBox>
-            <entityComboBox id="taskField" property="task">
-                <prefix>
-                    <icon icon="FILE_TEXT_O"/>
-                </prefix>
-                <actions>
-                    <action id="entityLookup" type="entity_lookup"/>
-                    <action id="entityClear" type="entity_clear"/>
-                </actions>
-            </entityComboBox>
-            <textField id="spentTimeField" property="spentTime">
-                <prefix>
-                    <icon icon="CLOCK"/>
-                </prefix>
-            </textField>
-            <select id="statusField" property="status"/>
-            <textArea id="descriptionField" property="description"
-                      height="9.5em" colspan="2">
-                <prefix>
-                    <icon icon="COMMENT_O"/>
-                </prefix>
-            </textArea>
-            <textArea id="rejectionReasonField" property="rejectionReason"
-                      height="9.5em" colspan="2" required="true">
-                <prefix>
-                    <icon icon="EXCLAMATION_CIRCLE_O"/>
-                </prefix>
-            </textArea>
-        </formLayout>
-        <hbox id="detailActions">
+    <layout padding="false" spacing="false" alignItems="STRETCH" expand="contentBox">
+        <vbox id="contentBox" classNames="overflow-auto">
+            <formLayout id="form"
+                            dataContainer="timeEntryDc">
+                <datePicker id="dateField" property="date">
+                    <prefix>
+                        <icon icon="CALENDAR"/>
+                    </prefix>
+                </datePicker>
+                <entityComboBox id="userField" property="user" readOnly="true">
+                    <prefix>
+                        <icon icon="USER"/>
+                    </prefix>
+                    <actions>
+                        <action id="assignSelf" icon="USER_CHECK" text="msg://actions.assignSelf.description"/>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                    <itemsQuery class="com.company.timesheets.entity.User"
+                                searchStringFormat="(?i)%${inputString}%"
+                                escapeValueForLike="true">
+                        <fetchPlan extends="_instance_name"/>
+                        <query>
+                            <![CDATA[select e from ts_User e
+                            where e.username like :searchString
+                                or e.firstName like :searchString
+                                or e.lastName like :searchString
+                                escape '\' order by e.username asc]]>
+                        </query>
+                    </itemsQuery>
+                </entityComboBox>
+                <entityComboBox id="taskField" property="task">
+                    <prefix>
+                        <icon icon="FILE_TEXT_O"/>
+                    </prefix>
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityComboBox>
+                <textField id="spentTimeField" property="spentTime">
+                    <prefix>
+                        <icon icon="CLOCK"/>
+                    </prefix>
+                </textField>
+                <select id="statusField" property="status"/>
+                <textArea id="descriptionField" property="description"
+                          height="9.5em" colspan="2">
+                    <prefix>
+                        <icon icon="COMMENT_O"/>
+                    </prefix>
+                </textArea>
+                <textArea id="rejectionReasonField" property="rejectionReason"
+                          height="9.5em" colspan="2" required="true">
+                    <prefix>
+                        <icon icon="EXCLAMATION_CIRCLE_O"/>
+                    </prefix>
+                </textArea>
+            </formLayout>
+        </vbox>
+        <hbox id="detailActions"
+              classNames="px-m py-s bg-contrast-5">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>

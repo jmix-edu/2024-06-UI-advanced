@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:app="http://company.com/schema/app-ui-components.xsd"
       title="msg://clientDetailView.title"
       focusComponent="nameField">
     <data>
@@ -55,35 +56,9 @@
                  width="100%"
                  opened="true"
                  themeNames="non-collapsible summary-filled bordered">
-            <formLayout dataContainer="contactInformationDc">
-                <responsiveSteps>
-                    <responsiveStep minWidth="0" columns="1"/>
-                    <responsiveStep minWidth="60em" columns="3"/>
-                </responsiveSteps>
-
-                <emailField id="emailField" property="email">
-                    <prefix>
-                        <icon icon="ENVELOPE"/>
-                    </prefix>
-                </emailField>
-                <textField id="phoneField" property="phone">
-                    <prefix>
-                        <icon icon="PHONE"/>
-                    </prefix>
-                </textField>
-                <textField id="urlField" property="url">
-                    <prefix>
-                        <icon icon="LINK"/>
-                    </prefix>
-                </textField>
-                <textArea id="addressField" property="address"
-                          height="9.5em" colspan="3">
-                    <prefix>
-                        <icon icon="MAP_MARKER"/>
-                    </prefix>
-                </textArea>
-
-            </formLayout>
+            <app:contactInformationFragment
+                    id="containerInformation"
+                    dataContainer="contactInformationDc"/>
         </details>
 
 

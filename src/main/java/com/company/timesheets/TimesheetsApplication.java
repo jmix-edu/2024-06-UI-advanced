@@ -2,6 +2,8 @@ package com.company.timesheets;
 
 import com.company.timesheets.component.contactInformation.ContactInformationFragment;
 import com.company.timesheets.component.contactInformation.ContactInformationFragmentLoader;
+import com.company.timesheets.component.themetoggle.ThemeToggle;
+import com.company.timesheets.component.themetoggle.ThemeToggleLoader;
 import com.google.common.base.Strings;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.component.page.Push;
@@ -63,6 +65,13 @@ public class TimesheetsApplication implements AppShellConfigurator {
     public ComponentRegistration contactInformationFragment() {
         return ComponentRegistrationBuilder.create(ContactInformationFragment.class)
                 .withComponentLoader("contactInformationFragment", ContactInformationFragmentLoader.class)
+                .build();
+    }
+
+    @Bean
+    public ComponentRegistration themeToggle() {
+        return ComponentRegistrationBuilder.create(ThemeToggle.class)
+                .withComponentLoader("themeToggle", ThemeToggleLoader.class)
                 .build();
     }
 }
